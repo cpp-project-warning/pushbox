@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="App.h" />
+    <ClInclude Include="COMMON\commondata.h" />
     <ClInclude Include="Mainwindow.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="ViewModel.h" />
@@ -135,11 +136,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="App.cpp" />
+    <ClCompile Include="COMMON\commondata.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mainwindow.cpp" />
     <ClCompile Include="Model.cpp" />
+    <ClCompile Include="test.cpp" />
     <ClCompile Include="ViewModel.cpp" />
     <ClCompile Include="ViewModelSink.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ProjectFiles\1.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
