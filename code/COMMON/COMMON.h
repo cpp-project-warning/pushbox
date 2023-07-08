@@ -27,7 +27,7 @@ private:
 	int box_number;
 	//1表示有墙，0表示没有
 	int wall[MAXN][MAXN];
-	set<position> destination;
+	std::set<position> destination;
 
 public:
 	Map() noexcept;
@@ -35,7 +35,8 @@ public:
 	Map& operator = (const Map&) = delete;
 	Map(int bn, int w[MAXN][MAXN], position des[]) noexcept;
 	~Map() noexcept;
-	set<position> get_destination();
+	std::set<position> get_destination();
+	int** get_wall();
 	void set_box_number(int bx);
 	void set_wall(int w[MAXN][MAXN]);
 	void set_destination(std::set<position> des);

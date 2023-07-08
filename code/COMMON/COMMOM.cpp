@@ -35,9 +35,14 @@ Map::~Map() noexcept
 
 }
 
-set<position> Map::get_destination()
+std::set<position> Map::get_destination()
 {
 	return destination;
+}
+
+int** Map::get_wall()
+{
+	return wall;
 }
 
 void Map::set_box_number(int bx)
