@@ -1,8 +1,53 @@
 #include "MODEL.h"
 
-Model::Model(int box_number, int wall[MAXN][MAXN], position destination[], position box[], position player) :
-	map(box_number, wall, destination), p(player), p_init(player)
+// Model::Model(int box_number, int wall[MAXN][MAXN], position destination[], position box[], position player) :
+// 	game_map(box_number, wall, destination), p(player), p_init(player)
+// {
+// 	for(auto a : box)
+// 	{
+// 		Box temp(a);
+// 		all_box.insert(temp);
+// 	}
+// 	all_box_init = all_box;
+// }
+
+Model::Model() noexcept
 {
+
+}
+
+Model::~Model() noexcept
+{
+
+}
+
+Map Model::get_game_map()
+{
+	return game_map;
+}
+
+Player Model::get_player()
+{
+	return p;
+}
+
+std::set<Box> Model::get_all_box()
+{
+	return all_box;
+}
+
+void Model::set_model(int box_number, int wall[MAXN][MAXN], position destination[], position box[], position player)
+{
+	game_map.set_box_number(box_number);
+	game_map.set_wall(wall);
+	std::set<position> des;
+	for(auto a : destination)
+	{
+		des.insert(a);
+	}
+	game_map.set_destination(des);
+	p.set_position(player);
+	p_init.set_position(player);
 	for(auto a : box)
 	{
 		Box temp(a);
@@ -11,30 +56,25 @@ Model::Model(int box_number, int wall[MAXN][MAXN], position destination[], posit
 	all_box_init = all_box;
 }
 
-Model::~Model() noexcept
-{
-
-}
-
-void Model::reset()
+void Model::reset_model()
 {
 	p.set_position(p_init.get_position());
 	all_box = all_box_init;
 }
 
-void Model::move(char c)
+void Model::move_operator(char c)
 {
 	p.move(c);
 }
 
-bool Model::judge()
+bool Model::judge_if_win()
 {
-	set<position> boxes_position;
+	std::set<position> boxes_position;
 	for(auto a : all_box)
 	{
 		boxes_position.insert(a.get_position());
 	}
-	if(map.get_destination() == boxes_position)
+	if(game_map.get_destination() == boxes_position)
 	{
 		return true;
 	}
