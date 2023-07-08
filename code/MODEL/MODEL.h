@@ -28,8 +28,8 @@ public:
 	void set_model(int box_number, int wall[MAXN][MAXN], position destination[], position box[], position player);
 	//回到初始状态
 	void reset_model();
-	//移动操作
-	void move_operator(char c);
+	//移动操作，返回是否产生有效移动
+	bool move_operator(char c);
 	//判断是否成功
 	bool judge_if_win();
 };

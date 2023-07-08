@@ -62,9 +62,10 @@ void Model::reset_model()
 	all_box = all_box_init;
 }
 
-void Model::move_operator(char c)
+bool Model::move_operator(char c)
 {
-	p.move(c);
+	p.move_player(c);
+	return true;
 }
 
 bool Model::judge_if_win()
