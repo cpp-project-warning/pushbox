@@ -76,28 +76,28 @@ void MainWindow::LoadGame() {
             mapItem[i][j]->setZValue(0);
             mapItem[i][j]->setPos(i * 35, j * 35);
             scene->addItem(mapItem[i][j]);
-            if (viewMap[i][j] & 1)  // 该位置有墙
+            if (viewMap[i][j] == 1)  // 该位置有墙
             {
                 wallItem[i][j] = new QGraphicsPixmapItem(wallPixmap);
                 wallItem[i][j]->setZValue(1);
                 wallItem[i][j]->setPos(i * 35, j * 35-11);
                 scene->addItem(wallItem[i][j]);
             }
-            if (viewMap[i][j] & 2) {  // 该位置有目标
+            if (viewMap[i][j] == 2) {  // 该位置有目标
                 aimItem[aimiter] = new QGraphicsPixmapItem(aimPixmap);
                 aimItem[aimiter]->setZValue(1);
 				aimItem[aimiter]->setPos(i * 35+2, j * 35+3);
 				scene->addItem(aimItem[aimiter]);
 				aimiter++;
             }
-            if (viewMap[i][j] & 4) {  // 该位置有box
+            if (viewMap[i][j] == 3) {  // 该位置有box
                 boxItem[boxiter] = new QGraphicsPixmapItem(boxPixmap);
                 boxItem[boxiter]->setZValue(1);
                 boxItem[boxiter]->setPos(i * 35, j * 35-10);
                 scene->addItem(boxItem[boxiter]);
                 aimiter++;
             }
-            if(viewMap[i][j] & 8) {  // 该位置有人
+            if(viewMap[i][j] == 4) {  // 该位置有人
 				playerItem = new QGraphicsPixmapItem(playerPixmap);
 				playerItem->setZValue(1);
 				playerItem->setPos(i * 35-7, j * 35);
@@ -151,8 +151,8 @@ void MainWindow::setviewMap() {
 }
 */
 
-void MainWindow::setviewMap(std::shared_ptr<int**> map) {
-    viewMap = *map;
+void MainWindow::setviewMap(int ** map) {
+    viewMap = map;
 }
 void MainWindow::resetMove() {
 	move = Nomove;
@@ -239,7 +239,7 @@ void MainWindow::onPreBtnClicked() {
     roundchange = -1;
 }
 
-void MainWindow::setDirection(direction d = Down) {
+void MainWindow::setDirection(direction d ) {
     if(d == Up)
 		playerPixmap = upPixmap;
 	else if(d == Down)
