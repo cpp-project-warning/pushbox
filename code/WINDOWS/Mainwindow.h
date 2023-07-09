@@ -39,7 +39,7 @@ public:
 
     direction getMovedir();
     int getRoundchange();
-    void setviewMap(std::shared_ptr<int**> map);
+    void setviewMap(int **map);
     void resetMove();
     void resetRoundchange();
     void setRound(std::shared_ptr<int> round);
