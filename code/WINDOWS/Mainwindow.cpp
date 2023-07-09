@@ -65,7 +65,6 @@ MainWindow::MainWindow(QWidget* parent)
 
 
 void MainWindow::LoadGame() {
-    setviewMap();
     int aimiter = 0; 
     int boxiter = 0;
     scene->clear();
@@ -75,33 +74,33 @@ void MainWindow::LoadGame() {
         {
             mapItem[i][j] = new QGraphicsPixmapItem(blockPixmap);
             mapItem[i][j]->setZValue(0);
-            mapItem[i][j]->setPos(j * 35, i * 35);
+            mapItem[i][j]->setPos(i * 35, j * 35);
             scene->addItem(mapItem[i][j]);
             if (viewMap[i][j] & 1)  // 该位置有墙
             {
                 wallItem[i][j] = new QGraphicsPixmapItem(wallPixmap);
                 wallItem[i][j]->setZValue(1);
-                wallItem[i][j]->setPos(j * 35, i * 35);
+                wallItem[i][j]->setPos(i * 35, j * 35-11);
                 scene->addItem(wallItem[i][j]);
             }
             if (viewMap[i][j] & 2) {  // 该位置有目标
                 aimItem[aimiter] = new QGraphicsPixmapItem(aimPixmap);
                 aimItem[aimiter]->setZValue(1);
-				aimItem[aimiter]->setPos(j * 35, i * 35);
+				aimItem[aimiter]->setPos(i * 35+2, j * 35+3);
 				scene->addItem(aimItem[aimiter]);
 				aimiter++;
             }
             if (viewMap[i][j] & 4) {  // 该位置有box
                 boxItem[boxiter] = new QGraphicsPixmapItem(boxPixmap);
                 boxItem[boxiter]->setZValue(1);
-                boxItem[boxiter]->setPos(j * 35, i * 35);
+                boxItem[boxiter]->setPos(i * 35, j * 35-10);
                 scene->addItem(boxItem[boxiter]);
                 aimiter++;
             }
             if(viewMap[i][j] & 8) {  // 该位置有人
 				playerItem = new QGraphicsPixmapItem(playerPixmap);
 				playerItem->setZValue(1);
-				playerItem->setPos(j * 35, i * 35);
+				playerItem->setPos(i * 35-7, j * 35);
 				scene->addItem(playerItem);
 			}
         }
@@ -130,7 +129,7 @@ void MainWindow::checkGame() {
     }
     LoadGame();
 }
-
+/*
 void MainWindow::setviewMap() {
     int**wall = vm->get_wall();
     for (int i = 0; i < mapSize; i++) {
@@ -139,7 +138,7 @@ void MainWindow::setviewMap() {
         }
     }
     std::set<Box> box = vm->get_all_box();
-    box_num = box.size();
+    //box_num = box.size();
     for (auto it = box.begin(); it != box.end(); it++) {
 		viewMap[it->get_position().x][it->get_position().y] += 4;
 	}
@@ -150,6 +149,30 @@ void MainWindow::setviewMap() {
     Player player = vm->get_player();
 	viewMap[player.get_position().x][player.get_position().y] += 8;
 }
+*/
+
+void MainWindow::setviewMap(std::shared_ptr<int**> map) {
+    viewMap = *map;
+}
+void MainWindow::resetMove() {
+	move = Nomove;
+    step++;
+    LoadGame();
+}
+void MainWindow::setRound(std::shared_ptr<int> round) {
+    this->round = *round;
+}
+direction MainWindow::getMovedir() {
+    return move;
+}
+int MainWindow::getRoundchange() {
+    return roundchange;
+}
+void MainWindow::resetRoundchange() {
+	roundchange = 2;
+    step = 0;
+    LoadGame();
+}
 
 MainWindow::~MainWindow() {
     delete preBtn;
@@ -159,86 +182,61 @@ MainWindow::~MainWindow() {
     delete stepLabel;
 }
 
-void MainWindow::paintEvent(QPaintEvent*) {
-
-}
-
-void MainWindow::mousePressEvent(QMouseEvent* event) {
-
-}
 
 void MainWindow::keyPressEvent(QKeyEvent* e) {
     switch (e->key()) 
     {
     case Qt::Key_W:
-        if (vm->move_operation(Up))
-            step++;
+        move = Up;
         setDirection(Up);
         break;
     case Qt::Key_A:
-        if(vm->move_operation(Left))
-			step++;
+        move = Left;
         setDirection(Left);
         break;
     case Qt::Key_S:
-        if (vm->move_operation(Down))
-            step++;
+        move = Down;
         setDirection(Down);
         break;
     case Qt::Key_D:
-        if (vm->move_operation(Right))
-            step++;
+        move = Right;
         setDirection(Right);
         break;
     case Qt::Key_Up:
-        if (vm->move_operation(Up))
-            step++;
+        move = Up;
         setDirection(Up);
         break;
     case Qt::Key_Left:
-        if (vm->move_operation(Left))
-            step++;
+        move = Left;
         setDirection(Left);
         break;
     case Qt::Key_Down:
-        if (vm->move_operation(Down))
-            step++;
+        move = Down;
         setDirection(Down);
         break;
     case Qt::Key_Right:
-        if (vm->move_operation(Right))
-            step++;
+        move = Right;
         setDirection(Right);
         break;
     default:
         break;
     }
-    // 更新游戏界面
-    checkGame();
 }
 
 void MainWindow::onNextBtnClicked(){
-    if (round < roundNum)
-        round++;
-    else
-        round = 1;
     setDirection();
-	LoadGame();
+    roundchange = 1;
 }
 
 void MainWindow::onRestartBtnClicked() {
     setDirection();
-    LoadGame();
+    roundchange = 0;
 }
 
 
 void MainWindow::onPreBtnClicked() {
-    if (round > 1)
-        round --;
-    else
-        round = roundNum;
     setDirection();
-    LoadGame();
+    roundchange = -1;
 }
 
 void MainWindow::setDirection(direction d = Down) {

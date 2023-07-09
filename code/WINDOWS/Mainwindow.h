@@ -36,30 +36,40 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget* parent = 0);
     ~MainWindow();
-    void paintEvent(QPaintEvent*);
+
+    direction getMovedir();
+    int getRoundchange();
+    void setviewMap(std::shared_ptr<int**> map);
+    void resetMove();
+    void resetRoundchange();
+    void setRound(std::shared_ptr<int> round);
+
+private slots:
+    void onNextBtnClicked();
+    void onRestartBtnClicked();
+    void onPreBtnClicked();
+
+private:
+
     void keyPressEvent(QKeyEvent* e);
-    void mousePressEvent(QMouseEvent* event);
 
     QGraphicsScene* scene = new QGraphicsScene(this);
     QGraphicsView* view = new QGraphicsView(scene, this);
 
-    void onNextBtnClicked();
-    void onRestartBtnClicked();
-    void onPreBtnClicked();
+
     void setDirection(direction d = Down);
 
-private:
-    void InitMap();
     void LoadGame();
     bool isSuccessful();
     void checkGame();
-    void setviewMap();
+    
 
     int round;
     int step;
     const QString title = "推箱子游戏";
-    ViewModel* vm;
-    int viewMap[mapSize][mapSize];
+    direction move = Nomove;
+    int roundchange = 2;
+    int** viewMap;
     int box_num;
 
 
