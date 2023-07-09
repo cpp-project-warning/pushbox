@@ -1,5 +1,7 @@
 #include "COMMON.h"
 
+int current_map_count = 1;
+
 Map::Map() noexcept
 {
 
@@ -33,12 +35,32 @@ Map::~Map() noexcept
 
 }
 
-set<position> Map::get_destination()
+std::set<position> Map::get_destination()
 {
 	return destination;
 }
 
-bool if_wall(int x, int y)
+int** Map::get_wall()
+{
+	return wall;
+}
+
+void Map::set_box_number(int bx)
+{
+	box_number = bx;
+}
+
+void Map::set_wall(int w[MAXN][MAXN])
+{
+	wall = w;
+}
+
+void Map::set_destination(std::set<position> des)
+{
+	destination = des;
+}
+
+bool Map::if_wall(int x, int y)
 {
 	if(wall[x][y] == 1)
 	{
@@ -65,7 +87,7 @@ void Player::set_position(position p)
 	player = p;
 }
 
-void Player::move(char c)
+void Player::move_player(char c)
 {
 	cout << c << endl;
 }
@@ -85,24 +107,24 @@ void Box::set_position(position p)
 	box = p;
 }
 
-bool Box::check_around(char c, Map map) throw(int)
+bool Box::check_around_if_wall(char c, Map game_map) throw(int)
 {
 	bool ans;
 	if(c == 'a')
 	{
-		ans = map.if_wall(box.x-1, box.y);
+		ans = game_map.if_wall(box.x-1, box.y);
 	}
 	else if(c == 'w')
 	{
-		ans = map.if_wall(box.x, box.y+1);
+		ans = game_map.if_wall(box.x, box.y+1);
 	}
 	else if(c == 's')
 	{
-		ans = map.if_wall(box.x, box.y-1);
+		ans = game_map.if_wall(box.x, box.y-1);
 	}
 	else if(c == 'd')
 	{
-		ans = map.if_wall(box.x+1, box.y);
+		ans = game_map.if_wall(box.x+1, box.y);
 	}
 	else
 	{
@@ -111,7 +133,7 @@ bool Box::check_around(char c, Map map) throw(int)
 	return ans;
 }
 
-void Box::move(char c, Map map)
+void Box::move_box(char c, Map game_map)
 {
-	cout << c << endl;
+	std::cout << c << endl;
 }
