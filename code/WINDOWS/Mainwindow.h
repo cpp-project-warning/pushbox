@@ -1,9 +1,8 @@
-#pragma once
 
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "../VIEWMODEL/VIEWMODEL.h"
+#include "../VIEWMODEL/ViwModel.h"
 #include "../COMMON/COMMON.h"
 
 #include <QtWidgets/QMainWindow>   // 主窗口类
