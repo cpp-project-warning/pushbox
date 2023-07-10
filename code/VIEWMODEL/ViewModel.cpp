@@ -1,4 +1,4 @@
-#include "VIEWMODEL.h"
+#include "ViewModel.h"
 
 ViewModel::ViewModel()
 {
