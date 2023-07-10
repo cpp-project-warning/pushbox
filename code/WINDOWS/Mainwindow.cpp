@@ -1,5 +1,5 @@
 #include "Mainwindow.h"
-
+extern int roundNum;
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent)
     , blockPixmap(":/img/block.png")
