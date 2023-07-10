@@ -1,4 +1,4 @@
-
+#include "COMMON.h"
 int current_map_count = 1;
 
 Map::Map()
