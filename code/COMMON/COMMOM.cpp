@@ -1,3 +1,4 @@
+#include "COMMON.h"
 
 int current_map_count = 1;
 
@@ -163,3 +164,26 @@ void Box::move_box(char c, Map game_map)
 	//std::cout << c << endl;
 }
 
+bool Box::operator < (const Box & rhs ) const
+{
+	if((box.x < rhs.box.x) || (box.x == rhs.box.x && box.y < rhs.box.y))
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+bool Box::operator == (const Box & rhs) const
+{
+	if(box.x == rhs.box.x && box.y == rhs.box.y)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
