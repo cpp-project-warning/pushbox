@@ -1,4 +1,5 @@
-#include "MODEL.h"
+
+#include "Model.h"
 
 // Model::Model(int box_number, int wall[MAXN][MAXN], position destination[], position box[], position player) :
 // 	game_map(box_number, wall, destination), p(player), p_init(player)
@@ -11,12 +12,12 @@
 // 	all_box_init = all_box;
 // }
 
-Model::Model() noexcept
+Model::Model()
 {
 
 }
 
-Model::~Model() noexcept
+Model::~Model()
 {
 
 }
@@ -41,16 +42,16 @@ void Model::set_model(int box_number, int wall[MAXN][MAXN], position destination
 	game_map.set_box_number(box_number);
 	game_map.set_wall(wall);
 	std::set<position> des;
-	for(auto a : destination)
+	for(int i = 0; i < box_number; i++)
 	{
-		des.insert(a);
+		des.insert(destination[i]);
 	}
 	game_map.set_destination(des);
 	p.set_position(player);
 	p_init.set_position(player);
-	for(auto a : box)
+	for(int i = 0; i < box_number; i++)
 	{
-		Box temp(a);
+		Box temp(box[i]);
 		all_box.insert(temp);
 	}
 	all_box_init = all_box;
@@ -84,3 +85,4 @@ bool Model::judge_if_win()
 		return false;
 	}
 }
+
