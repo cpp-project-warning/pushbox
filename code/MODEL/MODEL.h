@@ -14,13 +14,11 @@ private:
 	Player p;
 	std::set<Box> all_box;
 	Player p_init;
-	syd::set<Box> all_box_init;
+	std::set<Box> all_box_init;
 
 public:
-	Model() noexcept;
-	Model(const Model&) = delete;
-	Model& operator = (const Model&) = delete;
-	~Model() noexcept;
+	Model();
+	~Model();
 	Map get_game_map();
 	Player get_player();
 	std::set<Box> get_all_box();
