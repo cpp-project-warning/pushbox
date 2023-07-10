@@ -1,6 +1,6 @@
 #include "COMMON.h"
-int current_map_count = 1;
-
+int current_map_count=1;
+int roundNum = 5;  // 块大小
 Map::Map()
 {
 
