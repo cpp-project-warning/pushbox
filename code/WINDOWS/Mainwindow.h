@@ -25,8 +25,8 @@
 #include <set>
 #include <vector>
 
-extern const int mapSize = 20;  // 地图大小
-extern const int roundNum = 5;  // 块大小
+//extern const int mapSize = 20;  // 地图大小
+
 
 class MainWindow : public QMainWindow
 {
