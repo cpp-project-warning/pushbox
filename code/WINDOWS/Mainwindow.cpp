@@ -3,13 +3,13 @@
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent)
     , blockPixmap(":/img/block.png")
-    , boxPixmap(":/img/box.png")
-    , wallPixmap(":/img/wall.png")
-    , aimPixmap(":/img/ball.png")
-    , upPixmap(":/img/up.png")
-    , downPixmap(":./img/down.png")
-    , rightPixmap(":/img/right.png")
-    , leftPixmap(":/img/left.png")
+    , boxPixmap("../img/box.png")
+    , wallPixmap("../img/wall.png")
+    , aimPixmap("../img/ball.png")
+    , upPixmap("../img/up.png")
+    , downPixmap("../img/down.png")
+    , rightPixmap("../img/right.png")
+    , leftPixmap("../img/left.png")
 {
 
     scene->setItemIndexMethod(QGraphicsScene::NoIndex);
