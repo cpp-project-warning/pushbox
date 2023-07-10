@@ -1,3 +1,4 @@
+
 #include "Model.h"
 
 // Model::Model(int box_number, int wall[MAXN][MAXN], position destination[], position box[], position player) :
@@ -84,3 +85,4 @@ bool Model::judge_if_win()
 		return false;
 	}
 }
+

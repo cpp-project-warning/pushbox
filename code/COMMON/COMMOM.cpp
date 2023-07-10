@@ -1,4 +1,3 @@
-#include "COMMON.h"
 
 int current_map_count = 1;
 
@@ -163,3 +162,4 @@ void Box::move_box(char c, Map game_map)
 {
 	//std::cout << c << endl;
 }
+

@@ -1,3 +1,4 @@
+
 #include "ViewModel.h"
 
 ViewModel::ViewModel()
@@ -49,3 +50,4 @@ bool ViewModel::if_reset()
 {
 	return true;
 }
+
