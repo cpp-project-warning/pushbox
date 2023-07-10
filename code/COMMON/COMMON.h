@@ -66,7 +66,9 @@ public:
 	//对应方向有墙返回1，没有返回0
 	bool check_around_if_wall(char c, Map game_map) throw(int);
 	//'n'不移动，其他情况朝对应方向移动
-				void move_box(char c, Map game_map);
+	void move_box(char c, Map game_map);
+	bool Boperator < (const Box & rhs ) const;
+	
 };
 
 #endif
