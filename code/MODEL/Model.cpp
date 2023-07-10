@@ -1,4 +1,4 @@
-#include "MODEL.h"
+#include "Model.h"
 
 // Model::Model(int box_number, int wall[MAXN][MAXN], position destination[], position box[], position player) :
 // 	game_map(box_number, wall, destination), p(player), p_init(player)
