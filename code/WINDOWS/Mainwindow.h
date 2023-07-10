@@ -36,6 +36,7 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget* parent = 0);
     ~MainWindow();
+    void LoadGame();
 
     direction getMovedir();
     int getRoundchange();
@@ -59,7 +60,6 @@ private:
 
     void setDirection(direction d = Down);
 
-    void LoadGame();
     bool isSuccessful();
     void checkGame();
     
