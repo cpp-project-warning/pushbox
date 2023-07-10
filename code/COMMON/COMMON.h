@@ -18,6 +18,17 @@ struct position
 {
 	int x;
 	int y;
+	bool operator < (const position & rhs) const
+	 {
+	  if((x < rhs.x) || (x == rhs.x && y < rhs.y))
+	  {
+	   return true;
+	  }
+	  else
+	  {
+	   return false;
+	  }
+	 }
 };
 
 class Map
