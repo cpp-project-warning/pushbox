@@ -29,6 +29,17 @@ struct position
 	   return false;
 	  }
 	 }
+	bool operator == (const position & rhs) const
+	 {
+	  if(x == rhs.x && y == rhs.y)
+	  {
+	   return true;
+	  }
+	  else
+	  {
+	   return false;
+	  }
+	 }
 };
 
 class Map
@@ -78,8 +89,8 @@ public:
 	bool check_around_if_wall(char c, Map game_map) throw(int);
 	//'n'不移动，其他情况朝对应方向移动
 	void move_box(char c, Map game_map);
-	bool Boperator < (const Box & rhs ) const;
-	
+	bool operator < (const Box & rhs ) const;
+	bool operator == (const Box & rhs) const;
 };
 
 #endif
