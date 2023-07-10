@@ -6,7 +6,7 @@
 #define MAXN 20
 
 extern int current_map_count;
-
+extern  int roundNum = 5;  // 块大小
 enum direction
 {
 	Up,
