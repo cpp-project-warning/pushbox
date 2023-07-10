@@ -169,3 +169,14 @@ bool Box::operator < (const Box & rhs ) const
  else
   return false;
 }
+bool Box::operator == (const Box & rhs) const
+{
+ if(box.x == rhs.box.x && box.y == rhs.box.y)
+ {
+  return true;
+ }
+ else
+ {
+  return false;
+ }
+}
