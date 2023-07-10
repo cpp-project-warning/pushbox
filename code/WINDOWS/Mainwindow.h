@@ -2,7 +2,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "../VIEWMODEL/ViwModel.h"
+#include "../VIEWMODEL/ViewModel.h"
 #include "../COMMON/COMMON.h"
 
 #include <QtWidgets/QMainWindow>   // 主窗口类
