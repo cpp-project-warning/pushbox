@@ -1,4 +1,5 @@
-
+#ifndef _COMMON_H_
+#define _COMMON_H_
 
 #include "push_box_base.h"
 
@@ -11,7 +12,8 @@ enum direction
 	Up,
 	Down,
 	Left,
-	Right
+	Right,
+	Nomove
 };
 
 struct position
