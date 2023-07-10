@@ -1,9 +1,10 @@
 #include "../COMMON/push_box_base.h"
+#include "../COMMON/COMMON.h"
 
 int get_box_number()
 {
-	string datapath = "./Game" + map_count + "/box_number.txt";
-	ifstream file;
+	std::string datapath = "./Game" + std::to_string(current_map_count) + "/box_number.txt";
+	std::ifstream file;
 	file.open(datapath);
 	if(file.is_open())
 	{
@@ -19,8 +20,8 @@ int get_box_number()
 
 int** get_wall()
 {
-	string datapath = "./Game" + map_count + "/wall.txt";
-	ifstream file;
+	std::string datapath = "./Game" + std::to_string(current_map_count) + "/wall.txt";
+	std::ifstream file;
 	file.open(datapath);
 	if(file.is_open())
 	{
@@ -49,13 +50,13 @@ int** get_wall()
 
 position* get_destination(int box_number)
 {
-	string datapath = "./Game" + map_count + "/destination.txt";
-	ifstream file;
+	std::string datapath = "./Game" + std::to_string(current_map_count) + "/destination.txt";
+	std::ifstream file;
 	file.open(datapath);
 	if(file.is_open())
 	{
 		position *destination = 0;
-		destination = new int[MAXN];
+		destination = new position[MAXN];
 		for (int i = 0; i < box_number; i++)
 		{
 			int xx;
@@ -64,7 +65,7 @@ position* get_destination(int box_number)
 			file >> xx >> yy;
 			p.x = xx;
 			p.y = yy;
-			position[i] = p;
+			destination[i] = p;
 		}
 		return destination;
 	}
@@ -76,13 +77,13 @@ position* get_destination(int box_number)
 
 position* get_box(int box_number)
 {
-	string datapath = "./Game" + map_count + "/box.txt";
-	ifstream file;
+	std::string datapath = "./Game" + std::to_string(current_map_count) + "/box.txt";
+	std::ifstream file;
 	file.open(datapath);
 	if(file.is_open())
 	{
 		position *box = 0;
-		box = new int[MAXN];
+		box = new position[MAXN];
 		for (int i = 0; i < box_number; i++)
 		{
 			int xx;
@@ -103,8 +104,8 @@ position* get_box(int box_number)
 
 position get_player()
 {
-	string datapath = "./Game" + map_count + "/player.txt";
-	ifstream file;
+	std::string datapath = "./Game" + std::to_string(current_map_count) + "/player.txt";
+	std::ifstream file;
 	file.open(datapath);
 	position p;
 	p.x = -1;
