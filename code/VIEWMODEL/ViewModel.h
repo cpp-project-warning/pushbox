@@ -1,7 +1,7 @@
 #ifndef _VIEWMODEL_H_
 #define _VIEWMODEL_H_
 
-#include "../MODEL/MODEL.h"
+#include "../MODEL/Model.h"
 #include "../COMMON/COMMON.h"
 
 class ViewModel
