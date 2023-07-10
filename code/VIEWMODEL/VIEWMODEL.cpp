@@ -1,9 +1,11 @@
-ViewModel::ViewModel() noexcept
+#include "VIEWMODEL.h"
+
+ViewModel::ViewModel()
 {
 
 }
 
-ViewModel::~ViewModel() noexcept
+ViewModel::~ViewModel()
 {
 
 }
@@ -33,7 +35,7 @@ std::set<position> ViewModel::get_destination()
 	return m_model->get_game_map().get_destination();
 }
 
-bool ViewModel::move_operation(Direction dir)
+bool ViewModel::move_operation(direction dir)
 {
 	return true;	
 }
