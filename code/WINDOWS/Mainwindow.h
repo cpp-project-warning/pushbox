@@ -1,9 +1,8 @@
-#pragma once
 
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "../VIEWMODEL/VIEWMODEL.h"
+#include "../VIEWMODEL/ViewModel.h"
 #include "../COMMON/COMMON.h"
 
 #include <QtWidgets/QMainWindow>   // 主窗口类
@@ -26,8 +25,8 @@
 #include <set>
 #include <vector>
 
-extern const int mapSize = 20;  // 地图大小
-extern const int roundNum = 5;  // 块大小
+//extern const int mapSize = 20;  // 地图大小
+
 
 class MainWindow : public QMainWindow
 {
@@ -36,10 +35,11 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget* parent = 0);
     ~MainWindow();
+    void LoadGame();
 
     direction getMovedir();
     int getRoundchange();
-    void setviewMap(int **map);
+    void setviewMap(int map[MAXN][MAXN]);
     void resetMove();
     void resetRoundchange();
     void setRound(std::shared_ptr<int> round);
@@ -59,7 +59,6 @@ private:
 
     void setDirection(direction d = Down);
 
-    void LoadGame();
     bool isSuccessful();
     void checkGame();
     
@@ -69,7 +68,7 @@ private:
     const QString title = "推箱子游戏";
     direction move = Nomove;
     int roundchange = 2;
-    int** viewMap;
+    int viewMap[MAXN][MAXN];
     int box_num;
 
 

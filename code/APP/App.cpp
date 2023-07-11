@@ -5,13 +5,15 @@ void App::run()
 {
 	//initialize
 	model = std::make_shared<Model>();
+	model->set_model();
 	viewmodel = std::make_shared<ViewModel>();
 	viewmodel->set_model(model);
 
-	while (1) {
+//	while (1) {
 		//
 		int viewMap[MAXN][MAXN] = { 0 };
-		int** wall = viewmodel->get_wall();
+		int wall[MAXN][MAXN];
+		viewmodel->get_wall(wall);
 		for (int i = 0; i < MAXN; i++) {
 			for (int j = 0; j < MAXN; j++) {
 				if (wall[i][j] == 1) {
@@ -32,7 +34,7 @@ void App::run()
 		for (auto i = des.begin(); i != des.end(); i++) {
 			viewMap[(*i).x][(*i).y] = 2;
 		}
-		_mainwindow.setviewMap((int **)viewMap);
+		_mainwindow.setviewMap(viewMap);
 
 
 		std::shared_ptr<int>round = std::make_shared<int>();
@@ -42,9 +44,14 @@ void App::run()
 		direction dir=_mainwindow.getMovedir();
 		viewmodel->move_operation(dir);
 
+		/*
+		if(dir!=Nomove && viewmodel->move_operation(dir)){
+			_mainwindow->resetMove();
+		}
+		*/
 //		_mainwindow.resetMove();
 //		_mainwindow.resetRoundchange();
 
-
-	}
+		std::cout << "running\n";
+//	}
 }

@@ -1,13 +1,12 @@
 #include "COMMON.h"
-
-int current_map_count = 1;
-
-Map::Map() noexcept
+int current_map_count=1;
+int roundNum = 5;  // 块大小
+Map::Map()
 {
 
 }
 
-Map::Map(int bn, int w[MAXN][MAXN], position des[]) noexcept
+Map::Map(int bn, int w[MAXN][MAXN], position des[])
 {
 	box_number = bn;
 	for(int i = 0; i < MAXN; i++)
@@ -24,13 +23,13 @@ Map::Map(int bn, int w[MAXN][MAXN], position des[]) noexcept
 			}
 		}
 	}
-	for(auto a : des)
+	for(int i = 0; i < box_number; i++)
 	{
-		destination.insert(a);
+		destination.insert(des[i]);
 	}
 }
 
-Map::~Map() noexcept
+Map::~Map()
 {
 
 }
@@ -40,9 +39,33 @@ std::set<position> Map::get_destination()
 	return destination;
 }
 
-int** Map::get_wall()
+// int** Map::get_wall()
+// {
+// 	int **w = 0;
+// 	w = new int *[MAXN];
+// 	for (int i = 0; i < MAXN; i++)
+// 	{
+// 		*(w + i) = new int[MAXN];
+// 	}
+// 	for (int i = 0; i < MAXN; i++)
+// 	{
+// 		for (int j = 0; j < MAXN; j++)
+// 		{
+// 			w[i][j] = wall[i][j];
+// 		}
+// 	}
+// 	return w;
+// }
+
+void Map::get_wall(int w[][MAXN])
 {
-	return wall;
+	for (int i = 0; i < MAXN; i++)
+	{
+		for (int j = 0; j < MAXN; j++)
+		{
+			w[i][j] = wall[i][j];
+		}
+	}	
 }
 
 void Map::set_box_number(int bx)
@@ -50,9 +73,28 @@ void Map::set_box_number(int bx)
 	box_number = bx;
 }
 
-void Map::set_wall(int w[MAXN][MAXN])
+// void Map::set_wall(int** w)
+// {
+// 	for(int i = 0; i < MAXN; i++)
+// 	{
+// 		for(int j = 0; j < MAXN; j++)
+
+// 		{
+// 			wall[i][j] = ((int*)w)[i*MAXN+j];
+// 		}
+// 	}
+// }
+
+void Map::set_wall(int w[][MAXN])
 {
-	wall = w;
+	for(int i = 0; i < MAXN; i++)
+	{
+		for(int j = 0; j < MAXN; j++)
+
+		{
+			wall[i][j] = w[i][j];
+		}
+	}
 }
 
 void Map::set_destination(std::set<position> des)
@@ -72,12 +114,18 @@ bool Map::if_wall(int x, int y)
 	}
 }
 
-Player::Player(position p) : player.x(p.x), player.y(p.y)
+Player::Player()
 {
 
 }
 
-position Player::get_position() const noexcept
+Player::Player(position p)
+{
+	player.x = p.x;
+	player.y = p.y;
+}
+
+position Player::get_position() const
 {
 	return player;
 }
@@ -89,15 +137,16 @@ void Player::set_position(position p)
 
 void Player::move_player(char c)
 {
-	cout << c << endl;
+
 }
 
-Box::Box(position b) : box.x(b.x), box.y(b.y)
+Box::Box(position b)
 {
-
+	box.x = b.x;
+	box.y = b.y;
 }
 
-position Box::get_position() const noexcept
+position Box::get_position() const
 {
 	return box;
 }
@@ -135,5 +184,29 @@ bool Box::check_around_if_wall(char c, Map game_map) throw(int)
 
 void Box::move_box(char c, Map game_map)
 {
-	std::cout << c << endl;
+	//std::cout << c << endl;
+}
+
+bool Box::operator < (const Box & rhs ) const
+{
+	if((box.x < rhs.box.x) || (box.x == rhs.box.x && box.y < rhs.box.y))
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+bool Box::operator == (const Box & rhs) const
+{
+	if(box.x == rhs.box.x && box.y == rhs.box.y)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }

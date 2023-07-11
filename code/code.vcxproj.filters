@@ -47,6 +47,12 @@
     <ClCompile Include="WINDOWS\Mainwindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="COMMON\COMMOM.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MODEL\get.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="APP\App.h">
@@ -64,13 +70,16 @@
     <ClInclude Include="VIEWMODEL\sinks\ViewModelSink.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="WINDOWS\Mainwindow.h">
+    <ClInclude Include="COMMON\push_box_base.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MODEL\get.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="ProjectFiles\1.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
+    <QtMoc Include="WINDOWS\Mainwindow.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
 </Project>

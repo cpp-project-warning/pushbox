@@ -1,10 +1,11 @@
 #include "../COMMON/push_box_base.h"
-
+#include "../COMMON/COMMON.h"
+extern int current_map_count;
 int get_box_number()
 {
-	string datapath = "./Game" + map_count + "/box_number.txt";
-	ifstream file;
-	file.open(datapath);
+	std::string datapath = "..//ProjectFiles//Game" + std::to_string(current_map_count) + "//box_number.txt";
+	std::ifstream file;
+	file.open("D:\\pushbox\\code\\ProjectFiles\\Game1\\box_number.txt");
 	if(file.is_open())
 	{
 		int t;
@@ -17,19 +18,20 @@ int get_box_number()
 	}
 }
 
+/*
 int** get_wall()
 {
-	string datapath = "./Game" + map_count + "/wall.txt";
-	ifstream file;
+	std::string datapath = "..//ProjectFiles//Game" + std::to_string(current_map_count) + "//wall.txt";
+	std::ifstream file;
 	file.open(datapath);
 	if(file.is_open())
 	{
-		int **wall = 0;
-		wall = new int *[MAXN];
-		for (int i = 0; i < MAXN; i++)
-		{
-			*(wall + i) = new int[MAXN];
-		}
+//		std::cout << "success";
+		int wall[MAXN][MAXN] = { 0 };
+//		for (int i = 0; i < MAXN; i++)
+//		{
+//			*(wall + i) = new int[MAXN];
+//		}
 		for (int i = 0; i < MAXN; i++)
 		{
 			for (int j = 0; j < MAXN; j++)
@@ -39,23 +41,44 @@ int** get_wall()
 				wall[i][j] = t;
 			}
 		}
-		return wall;
+		return (int **)wall;
 	}
 	else
 	{
+///		std::cout << "read_file_failed\n";
 		return NULL;
+	}
+}
+*/
+
+void get_wall(int w[][MAXN])
+{
+	std::string datapath = "..//ProjectFiles//Game" + std::to_string(current_map_count) + "//wall.txt";
+	std::ifstream file;
+	file.open("D:\\pushbox\\code\\ProjectFiles\\Game1\\wall.txt");
+	if(file.is_open())
+	{
+		for(int i = 0; i < MAXN; i++)
+		{
+			for(int j = 0; j < MAXN; j++)
+			{
+				int t;
+				file >> t;
+				w[i][j] = t;
+			}
+		}
 	}
 }
 
 position* get_destination(int box_number)
 {
-	string datapath = "./Game" + map_count + "/destination.txt";
-	ifstream file;
-	file.open(datapath);
+	std::string datapath = "..//ProjectFiles//Game" + std::to_string(current_map_count) + "//destination.txt";
+	std::ifstream file;
+	file.open("D:\\pushbox\\code\\ProjectFiles\\Game1\\destination.txt");
 	if(file.is_open())
 	{
 		position *destination = 0;
-		destination = new int[MAXN];
+		destination = new position[MAXN];
 		for (int i = 0; i < box_number; i++)
 		{
 			int xx;
@@ -64,7 +87,7 @@ position* get_destination(int box_number)
 			file >> xx >> yy;
 			p.x = xx;
 			p.y = yy;
-			position[i] = p;
+			destination[i] = p;
 		}
 		return destination;
 	}
@@ -76,13 +99,13 @@ position* get_destination(int box_number)
 
 position* get_box(int box_number)
 {
-	string datapath = "./Game" + map_count + "/box.txt";
-	ifstream file;
-	file.open(datapath);
+	std::string datapath = "..//ProjectFiles//Game" + std::to_string(current_map_count) + "//box.txt";
+	std::ifstream file;
+	file.open("D:\\pushbox\\code\\ProjectFiles\\Game1\\box.txt");
 	if(file.is_open())
 	{
 		position *box = 0;
-		box = new int[MAXN];
+		box = new position[MAXN];
 		for (int i = 0; i < box_number; i++)
 		{
 			int xx;
@@ -103,9 +126,9 @@ position* get_box(int box_number)
 
 position get_player()
 {
-	string datapath = "./Game" + map_count + "/player.txt";
-	ifstream file;
-	file.open(datapath);
+	std::string datapath = "..//ProjectFiles//Game" + std::to_string(current_map_count) + "//player.txt";
+	std::ifstream file;
+	file.open("D:\\pushbox\\code\\ProjectFiles\\Game1\\player.txt");
 	position p;
 	p.x = -1;
 	p.y = -1;

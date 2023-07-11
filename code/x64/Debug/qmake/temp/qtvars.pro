@@ -1,5 +1,5 @@
 CONFIG += no_fixpath
-QT += quick
+QT += core gui quick widgets uitools
         
         
       

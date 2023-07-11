@@ -32,7 +32,7 @@
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
     <QtInstall>6.5.1_msvc2019_64</QtInstall>
-    <QtModules>quick</QtModules>
+    <QtModules>core;gui;quick;widgets;uitools</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
@@ -55,6 +55,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <IncludePath>D:\Qt\6.5.1\msvc2019_64\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\Qt\6.5.1\msvc2019_64\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
   </PropertyGroup>
@@ -84,7 +86,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="APP\App.cpp" />
+    <ClCompile Include="COMMON\COMMOM.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MODEL\get.cpp" />
     <ClCompile Include="MODEL\Model.cpp" />
     <ClCompile Include="VIEWMODEL\sinks\ViewModelSink.cpp" />
     <ClCompile Include="VIEWMODEL\ViewModel.cpp" />
@@ -95,13 +99,12 @@
   <ItemGroup>
     <ClInclude Include="APP\App.h" />
     <ClInclude Include="COMMON\COMMON.h" />
+    <ClInclude Include="COMMON\push_box_base.h" />
+    <ClInclude Include="MODEL\get.h" />
     <ClInclude Include="MODEL\Model.h" />
     <ClInclude Include="VIEWMODEL\sinks\ViewModelSink.h" />
     <ClInclude Include="VIEWMODEL\ViewModel.h" />
-    <ClInclude Include="WINDOWS\Mainwindow.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="ProjectFiles\1.txt" />
+    <QtMoc Include="WINDOWS\Mainwindow.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

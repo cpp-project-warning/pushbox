@@ -1,15 +1,15 @@
 #include "Mainwindow.h"
-
+extern int roundNum;
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent)
-    , blockPixmap(":/img/block.png")
-    , boxPixmap(":/img/box.png")
-    , wallPixmap(":/img/wall.png")
-    , aimPixmap(":/img/ball.png")
-    , upPixmap(":/img/up.png")
-    , downPixmap(":./img/down.png")
-    , rightPixmap(":/img/right.png")
-    , leftPixmap(":/img/left.png")
+    , blockPixmap("D:\\pushbox\\code\\img\\block.png")
+    , boxPixmap("D:\\pushbox\\code\\img\\box.png")
+    , wallPixmap("D:\\pushbox\\code\\img\\wall.png")
+    , aimPixmap("D:\\pushbox\\code\\img\\ball.png")
+    , upPixmap("D:\\pushbox\\code\\img\\up.png")
+    , downPixmap("D:\\pushbox\\code\\img\\down.png")
+    , rightPixmap("D:\\pushbox\\code\\img\\right.png")
+    , leftPixmap("D:\\pushbox\\code\\img\\left.png")
 {
 
     scene->setItemIndexMethod(QGraphicsScene::NoIndex);
@@ -19,7 +19,7 @@ MainWindow::MainWindow(QWidget* parent)
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setFrameStyle(0);
     view->setSceneRect(0, 0, 700, 700);
-
+    setFixedSize(750, 800);
 
     round = 1;
     step = 0;
@@ -34,6 +34,10 @@ MainWindow::MainWindow(QWidget* parent)
     nextBtn = new QPushButton(QString("下一关"), this);
     restartBtn = new QPushButton(QString("重新开始"), this);
     preBtn = new QPushButton(QString("上一关"), this);
+
+    connect(nextBtn, SIGNAL(clicked()), this, SLOT(onNextBtnClicked()));
+    connect(restartBtn, SIGNAL(clicked()), this, SLOT(onRestartBtnClicked()));
+    connect(preBtn, SIGNAL(clicked()), this, SLOT(onPreBtnClicked()));
 
     QHBoxLayout* buttonLayout = new QHBoxLayout;
     buttonLayout->addWidget(preBtn);
@@ -55,11 +59,9 @@ MainWindow::MainWindow(QWidget* parent)
     centralWidget->setLayout(mainLayout);
     setCentralWidget(centralWidget);
 
+    show();
 
 
-    connect(nextBtn, SIGNAL(clicked()), this, SLOT(onNextBtnClicked()));
-    connect(restartBtn, SIGNAL(clicked()), this, SLOT(onRestartBtnClicked()));
-    connect(preBtn, SIGNAL(clicked()), this, SLOT(onPreBtnClicked()));
 
 }
 
@@ -100,7 +102,7 @@ void MainWindow::LoadGame() {
             if(viewMap[i][j] == 4) {  // 该位置有人
 				playerItem = new QGraphicsPixmapItem(playerPixmap);
 				playerItem->setZValue(1);
-				playerItem->setPos(i * 35-7, j * 35);
+				playerItem->setPos(i * 35-7, j * 35-30);
 				scene->addItem(playerItem);
 			}
         }
@@ -134,7 +136,7 @@ void MainWindow::setviewMap() {
     int**wall = vm->get_wall();
     for (int i = 0; i < mapSize; i++) {
         for (int j = 0; j < mapSize; j++) {
-            viewMap[i][j] = wall[i][j];
+            ((int *)viewMap)[i*MAXN+j] = wall[i][j];
         }
     }
     std::set<Box> box = vm->get_all_box();
@@ -151,8 +153,12 @@ void MainWindow::setviewMap() {
 }
 */
 
-void MainWindow::setviewMap(int ** map) {
-    viewMap = map;
+void MainWindow::setviewMap(int  map[MAXN][MAXN]) {
+    for (int i = 0; i < MAXN; i++) {
+        for (int j = 0; j < MAXN; j++) {
+            viewMap[i][j] = map[i][j];
+        }
+    }
 }
 void MainWindow::resetMove() {
 	move = Nomove;
